@@ -75,7 +75,7 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
           }
           return moment(date).format('MM/DD/YYYY h:mm A');
         });
-        ngModel.$validators.time = function(modelValue) {
+        ngModel.$validators.datetime = function(modelValue) {
           return (!attrs.required && !element.val().trim()) ? true : modelValue !== null;
         };
       }
