@@ -25,8 +25,8 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
         if (!angular.isDefined(date)) {
           return;
         }
-        if (!date) {
-          throw new Error('No ngModel value provided.');
+        if (date !== null && !angular.isDate(date)) {
+          throw new Error('ngModel must be a Date object.');
         }
         if (!element.is(':focus') && !invalidInput()) {
           element.data('DateTimePicker').date(date);
