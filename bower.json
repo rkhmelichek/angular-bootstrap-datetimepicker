@@ -1,0 +1,17 @@
+{
+  "name": "angular-bootstrap-datetimepicker",
+  "description": "An AngularJS wrapper around the bootstrap-datetimepicker widget",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rkhmelichek/angular-bootstrap-datetimepicker",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.x",
+    "angular-mocks": "1.5.x",
+    "bootstrap": "3.3.x",
+    "jquery": "2.2.x",
+    "moment": "^2.14.1",
+    "moment-timezone": "^0.5.4",
+    "eonasdan-bootstrap-datetimepicker": "https://github.com/rkhmelichek/bootstrap-datetimepicker.git#ed155c18f69aa27718f15d649a45b3ffa7eca28c"
+  }
+}
