@@ -34,6 +34,22 @@ describe('Bootstrap DateTimePicker', function() {
         expect($rootScope.date.getTime()).toEqual(date.getTime());
       });
     });
+
+    it('should update the model and datetimepicker date from user input', function() {
+      inject(function($compile, $rootScope) {
+        var date = new Date(2016, 0, 1);
+        var element = $compile("<input type='text' bootstrap-datetimepicker ng-model='date'/>")($rootScope);
+        $rootScope.$apply(function() {
+          $rootScope.date = date;
+        });
+
+        var inputMoment = moment("2016-01-01 10:10");
+        element.val(inputMoment.format('MM/DD/YYYY h:mm A')).trigger('change');
+
+        expect(element.data('DateTimePicker').date().toDate()).toEqual(inputMoment.toDate());
+        expect($rootScope.date.getTime()).toEqual(inputMoment.toDate().getTime());
+      });
+    });
   });
 
   describe('timezone functionality', function() {

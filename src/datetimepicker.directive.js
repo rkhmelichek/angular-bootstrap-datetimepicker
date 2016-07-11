@@ -62,6 +62,10 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
 
       if (element.is('input')) {
         ngModel.$parsers.unshift(function(viewValue) {
+          // Widget has input change listener, but angular seems to stop propagation, so we update the date here...
+          element.data('DateTimePicker').date(viewValue);
+
+          // Return the value to update ngModel with.
           return element.data('DateTimePicker').date().toDate();
         });
 
