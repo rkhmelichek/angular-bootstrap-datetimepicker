@@ -13,5 +13,8 @@
     "moment": "^2.14.1",
     "moment-timezone": "^0.5.4",
     "eonasdan-bootstrap-datetimepicker": "https://github.com/rkhmelichek/bootstrap-datetimepicker.git#ed155c18f69aa27718f15d649a45b3ffa7eca28c"
-  }
+  },
+  "main": [
+    "src/datetimepicker.directive.js"
+  ]
 }
