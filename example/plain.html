@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" media="screen" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" />
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+        <script type="text/javascript" src="../bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
+        <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker').datetimepicker({
+                    keepInvalid: false,
+                    timeZone: 'Europe/London'
+                });
+
+                $('#datetimepicker').on('dp.change', function (e) {
+                    console.log('Date changed');
+                    console.log('New date: ' + e.date.toDate());
+                });
+
+                $('#datetimepicker').on('dp.error', function (e) {
+                    console.log('Error parsing date');
+                    console.log(e);
+                });
+
+                $('#set-date').on('click', function (e) {
+                    // When passing the date as a String, the widget will parse the date as being in the chosen timezone.
+                    //$('#datetimepicker').data('DateTimePicker').date(moment(new Date()).format('MM/DD/YYYY h:mm A'));
+
+                    // When passing the date as a Date, the widget will format the date as being in the chosen timezone.
+                    $('#datetimepicker').data('DateTimePicker').date(new Date());
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group' id='datetimepicker'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <button type="button" id="set-date" class="btn btn-default">Set Date</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

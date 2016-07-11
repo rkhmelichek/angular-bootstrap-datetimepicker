@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+    <head>
+        <link rel="stylesheet" type="text/css" media="screen" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" />
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+        <script type="text/javascript" src="../bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
+        <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../src/datetimepicker.directive.js"></script>
+        <script>
+            var app = angular.module('testApp', ['bootstrap.datetimepicker']);
+
+            app.controller('DateTimePickerCtrl', function ($scope) {
+                $scope.date = new Date();
+
+                $scope.options = {
+                    timeZone: 'Europe/London'
+                };
+
+                $scope.resetDate = function(date) {
+                    $scope.date = new Date();
+                };
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row" ng-controller="DateTimePickerCtrl">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <form name="myForm">
+                            <div class='input-group'>
+                                <input type='text' class="form-control" ng-model="date" bootstrap-datetimepicker='options' name="myInput"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-default" ng-click="resetDate()">Set Date</button>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+
+                            <div ng-if="myForm.myInput.$error.datetime">
+                                The date-time input is invalid
+                            </div>
+                            
+                            <div>{{ date | date:'short' }}</div>
+                            <div>{{ date | date:'MMM d, y hh:mm Z' }}</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
