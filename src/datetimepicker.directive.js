@@ -47,7 +47,7 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
       scope.$watch('bootstrapDatetimepicker', function() {
         element.data('DateTimePicker').options(angular.extend(config, scope.bootstrapDatetimepicker ? scope.bootstrapDatetimepicker : {}));
         ngModel.$render();
-      });
+      }, true);
 
       // Initialize widget.
       element.datetimepicker(

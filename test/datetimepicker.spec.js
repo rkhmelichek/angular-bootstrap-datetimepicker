@@ -118,6 +118,14 @@ describe('Bootstrap DateTimePicker', function() {
         expect(element.data('DateTimePicker').date().toDate()).toEqual(date);
         expect($rootScope.date.getTime()).toEqual(date.getTime());
         expect(element.val()).toEqual('01/01/2016 5:10 AM');
+
+        // Update without changing reference.
+        $rootScope.$apply(function() {
+          $rootScope.options.timeZone = 'Europe/London';
+        });
+        expect(element.data('DateTimePicker').date().toDate()).toEqual(date);
+        expect($rootScope.date.getTime()).toEqual(date.getTime());
+        expect(element.val()).toEqual('01/01/2016 10:10 AM');
       });
     });
   });
