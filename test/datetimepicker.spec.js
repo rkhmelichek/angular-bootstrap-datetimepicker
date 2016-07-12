@@ -46,6 +46,9 @@ describe('Bootstrap DateTimePicker', function() {
         var inputMoment = moment("2016-01-01 10:10");
         element.val(inputMoment.format('MM/DD/YYYY h:mm A')).trigger('change');
 
+        // Force $digest loop to run.
+        $rootScope.$apply(function() {
+        });
         expect(element.data('DateTimePicker').date().toDate()).toEqual(inputMoment.toDate());
         expect($rootScope.date.getTime()).toEqual(inputMoment.toDate().getTime());
       });

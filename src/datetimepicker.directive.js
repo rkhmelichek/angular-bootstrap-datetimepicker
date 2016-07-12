@@ -34,9 +34,6 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
         if (date === null) {
           resetInput();
         }
-
-        // TODO: The widget also updates the input element value (previously, it didn't format it according to the chosen timezone).
-        //element.val(ngModel.$viewValue || '');
       };
 
       scope.$watch('ngModel', function() {
@@ -68,39 +65,21 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
 
       if (element.is('input')) {
         ngModel.$parsers.unshift(function(viewValue) {
-          // Widget has input change listener, but angular seems to stop propagation, so we update the date here...
-          element.data('DateTimePicker').date(viewValue);
-
+          // We let the widget handle all input changes, which we listen for via the 'dp.change' event.
           // Return the value to update ngModel with.
           return element.data('DateTimePicker').date().toDate();
         });
 
-        // TODO: Widget already updates the input element value...
-        // The formatters are applied in reverse order, so add ours last.
-        ngModel.$formatters.push(function(date) {
-          // Format model with the configured timezone.
-          var tz = element.data('DateTimePicker').options().timeZone;
-          if (tz) {
-            return moment(date).tz(tz).format('MM/DD/YYYY h:mm A');
-          }
-          return moment(date).format('MM/DD/YYYY h:mm A');
-        });
+        // Widget already updates the input element value, disable the $formatters.
+        ngModel.$formatters = [];
         ngModel.$validators.datetime = function(modelValue) {
           return (!attrs.required && !element.val().trim()) ? true : modelValue !== null;
         };
       }
 
-      // TODO: Widget already updates the input element value...
       element.on('dp.change', function (e) {
         scope.$evalAsync(function() {
-          var tz = element.data('DateTimePicker').options().timeZone;
-          var value;
-          if (tz) {
-            value = e.date.tz(tz).format('MM/DD/YYYY h:mm A');
-          } else {
-            value = e.date.format('MM/DD/YYYY h:mm A');
-          }
-          ngModel.$setViewValue(value);
+          scope.ngModel = e.date.toDate();
         });
       });
     }
