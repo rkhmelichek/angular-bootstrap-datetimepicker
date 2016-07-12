@@ -91,5 +91,34 @@ describe('Bootstrap DateTimePicker', function() {
         expect(element.val()).toEqual('01/01/2016 10:10 AM');
       });
     });
+
+    it('should dynamically adjust the timezone based on init options', function() {
+      inject(function($compile, $rootScope) {
+        $rootScope.$apply(function() {
+          $rootScope.options = {
+            timeZone: 'Europe/London'
+          };
+        });
+
+        var date = moment.tz("2016-01-01 05:10", "America/New_York").toDate();
+        var element = $compile("<input type='text' bootstrap-datetimepicker='options' ng-model='date'/>")($rootScope);
+        $rootScope.$apply(function() {
+          $rootScope.date = date;
+        });
+        expect(element.data('DateTimePicker').date().toDate()).toEqual(date);
+        expect($rootScope.date.getTime()).toEqual(date.getTime());
+        expect(element.val()).toEqual('01/01/2016 10:10 AM');
+
+        // We expect the datetime value formatting to change to reflect the new timezone.
+        $rootScope.$apply(function() {
+          $rootScope.options = {
+            timeZone: 'America/New_York'
+          };
+        });
+        expect(element.data('DateTimePicker').date().toDate()).toEqual(date);
+        expect($rootScope.date.getTime()).toEqual(date.getTime());
+        expect(element.val()).toEqual('01/01/2016 5:10 AM');
+      });
+    });
   });
 });
