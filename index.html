@@ -12,14 +12,15 @@
         <script>
             var app = angular.module('testApp', ['bootstrap.datetimepicker']);
 
+            var initialDate = moment("12-01-2000", "MM-DD-YYYY").toDate();
             app.controller('DateTimePickerCtrl', function ($scope) {
-                $scope.date = new Date();
+                $scope.date = initialDate;
 
                 $scope.options = {
                 };
 
-                $scope.resetDate = function(date) {
-                    $scope.date = new Date();
+                $scope.resetDate = function() {
+                    $scope.date = initialDate;
                 };
             });
         </script>

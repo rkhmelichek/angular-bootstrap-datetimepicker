@@ -15,5 +15,9 @@ describe('DateTimePicker Test Application', function() {
     dateInput.sendKeys(protractor.Key.TAB);  // Makes sure the element loses focus.
 
     expect(element(by.binding('date')).getText()).toEqual('7/1/16 8:11 PM');
+
+    // Test reset date button.
+    element(by.id('reset-date-btn')).click();
+    expect(element(by.binding('date')).getText()).toEqual('12/1/00 12:00 AM');
   });
 });
