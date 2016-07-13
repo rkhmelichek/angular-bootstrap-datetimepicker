@@ -36,10 +36,6 @@ m.directive('bootstrapDatetimepicker', ['$parse', '$window', 'bootstrapDateTimeP
         }
       };
 
-      scope.$watch('ngModel', function() {
-        ngModel.$render();
-      }, true);
-
       // Dynamically update the datetimepicker options...
       scope.$watch('bootstrapDatetimepicker', function() {
         element.data('DateTimePicker').options(angular.extend(config, scope.bootstrapDatetimepicker ? scope.bootstrapDatetimepicker : {}));
